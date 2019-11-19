@@ -9,6 +9,10 @@ logger = logging.getLogger(__name__)
 
 def _get_pytorch_version():
     version = torch.__version__
+
+    # PyTorch versions are now named as 1.3.0+cpu or 1.3.1+cu92 for CUDA
+    version = version.split('+')[0]
+
     major, minor, patch = [int(x) for x in version.split(".")]
     if major != 1:
         raise RuntimeError(
